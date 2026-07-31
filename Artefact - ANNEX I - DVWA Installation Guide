@@ -1,1 +1,112 @@
 
+1. Update Kali Linux
+1.	Open a terminal in Kali.[geeksforgeeks]
+2.	Run:
+bash
+sudo apt update && sudo apt -y full-upgrade
+This updates packages before installing the web stack.[geeksforgeeks]
+ 
+2. Install Apache, MariaDB, and PHP
+1.	In the terminal, install the required services and PHP modules:
+bash
+sudo apt install apache2 mariadb-server php php-mysqli php-gd libapache2-mod-php -y
+Apache provides the web server; MariaDB provides the database; PHP and modules are required for DVWA.[geeksforgeeks]
+2.	Enable and start services:
+bash
+sudo systemctl enable apache2 mariadb
+sudo systemctl start apache2 mariadb
+This ensures the web server and database start now and on boot.[tecnosender]
+ 
+3. Download DVWA into the Web Root
+1.	Change to the Apache web root directory:
+bash
+cd /var/www/html
+DVWA must reside under the web root to be served by Apache.[geeksforgeeks]
+2.	Install Git if needed, then clone DVWA:
+bash
+sudo apt install git -y
+sudo git clone https://github.com/digininja/DVWA.git
+This downloads the DVWA source code into /var/www/html/DVWA.[geeksforgeeks]
+ 
+4. Set DVWA Directory Permissions
+1.	Verify the DVWA directory exists:
+bash
+ls
+You should see DVWA listed.[geeksforgeeks]
+2.	Set broad permissions so the web server can read and write files for lab use:
+bash
+sudo chmod -R 777 DVWA
+The video uses chmod -R 777; in a real environment you would prefer tighter www-data ownership, but for a local test lab this is acceptable.[youtube][geeksforgeeks]
+ 
+5. Prepare the DVWA Configuration File
+1.	Change into the DVWA configuration directory:
+bash
+cd DVWA/config
+[geeksforgeeks]
+2.	Copy the default configuration template:
+bash
+sudo cp config.inc.php.dist config.inc.php
+DVWA uses config.inc.php as the active configuration file.[geeksforgeeks]
+3.	Open config.inc.php in a text editor:
+bash
+sudo mousepad config.inc.php
+(Any editor such as nano or vim is acceptable; the video uses a GUI editor.)[geeksforgeeks]
+4.	Set database credentials in the file, for example:
+o	Database user: admin
+o	Database password: password
+Update the corresponding lines in config.inc.php, then save and close.[geeksforgeeks]
+ 
+6. Create the DVWA Database and User
+1.	Start a MariaDB shell as root:
+bash
+sudo mysql -u root -p
+Leave the password blank and press Enter if no root password is configured.[youtube][geeksforgeeks]
+2.	Create the DVWA database:
+sql
+CREATE DATABASE dvwa;
+[geeksforgeeks]
+3.	Create a dedicated DVWA user and grant privileges, matching the credentials you set in config.inc.php (example: admin / password):
+sql
+CREATE USER 'admin'@'127.0.0.1' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON dvwa.* TO 'admin'@'127.0.0.1';
+FLUSH PRIVILEGES;
+EXIT;
+This allows DVWA to connect to the dvwa database from localhost using the specified user.[youtube][geeksforgeeks]
+ 
+7. Adjust PHP Configuration (allow_url_include)
+1.	Locate the PHP configuration file under Apache’s configuration directory (for example, /etc/php/8.2/apache2/php.ini, version may differ).[youtube][geeksforgeeks]
+2.	Change to the directory and edit php.ini:
+bash
+cd /etc/php/8.2/apache2
+sudo mousepad php.ini
+Replace 8.2 with your installed PHP version if needed.[youtube][digininja-dvwa.mintlify]
+3.	Use the editor’s search function to find allow_url_fopen and allow_url_include.[youtube]
+4.	Ensure both directives are set to On:
+text
+allow_url_fopen = On
+allow_url_include = On
+DVWA requires allow_url_include for some vulnerabilities to function; the video explicitly enables these flags.[geeksforgeeks][youtube]
+5.	Save changes and close the editor.[youtube]
+ 
+8. Restart Apache
+1.	Restart Apache to apply the PHP configuration changes:
+bash
+sudo systemctl restart apache2
+[geeksforgeeks][youtube]
+ 
+9. Access DVWA in the Browser
+1.	Open a web browser inside Kali (for example, Firefox).[geeksforgeeks]
+2.	Navigate to:
+text
+http://127.0.0.1/DVWA
+This should load the DVWA login/setup page.[youtube][geeksforgeeks]
+3.	If you see a warning about missing database tables, click the Setup or Create / Reset Database button in the DVWA interface to initialise the schema.[digininja-dvwa.mintlify]
+ 
+10. Log In and Verify
+1.	On the DVWA login page, use the default credentials:
+o	Username: admin
+o	Password: password
+[digininja-dvwa.mintlify]
+2.	After logging in, confirm that DVWA loads the main interface and that modules (such as SQL Injection or XSS) are available.[geeksforgeeks]
+3.	Optionally set DVWA Security to Low to begin testing, then raise the level as needed for your experiments.[digininja-dvwa.mintlify]
+
