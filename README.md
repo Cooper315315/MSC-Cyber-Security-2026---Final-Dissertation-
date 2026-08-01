@@ -44,5 +44,3 @@ The study uses a **controlled experimental design** within an isolated virtual l
 - **Scan duration** — average time taken per tool, per target, across scan iterations
 
 ***
-
-Let me know if you'd like this adapted into a proper `README.md` file for direct upload to your repository, or if you want a shorter version for the main GitHub profile page versus a longer one for the specific dissertation repo.
