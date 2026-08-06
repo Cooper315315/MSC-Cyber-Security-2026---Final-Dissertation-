@@ -85,8 +85,20 @@ Across both targets, over 85–94% of individual findings were detected by only 
 
 Nikto was fastest but shallowest; Burp's longer runtime enabled deeper crawling, authentication handling and payload confirmation, though ZAP's shorter duration was also partly driven by tool stability issues encountered during testing.
 
-## 🧾 Conclusion
 
-The findings confirm that **no single automated DAST tool provides complete vulnerability visibility**. Burp Suite Professional was the strongest individual scanner — delivering the deepest application-layer detection, the most High severity confirmed findings, and the broadest OWASP Top 10:2025 coverage. OWASP ZAP was a valuable but less consistent scanner, contributing strong raw detection volume but weaker high-risk confirmation, partly constrained by runtime limitations. Nikto, while narrower in scope, added meaningful server-level coverage that neither application-layer scanner replicated.
+## ✅ Conclusion
 
-Critically, the overlap analysis showed that the three tools were **highly complementary**, with the vast majority of findings unique to a single scanner — reinforcing that a multi-tool DAST strategy detects substantially more vulnerabilities than any single tool alone. The study also highlights that severity ratings are **not directly comparable across scanners**, since Burp Suite Professional and OWASP ZAP apply different underlying classification logic, and that scanner configuration and runtime allowances materially influence detection outcomes. The overall conclusion is that automated scanning delivers valuable but incomplete security assurance, and must be combined with multiple tools, informed interpretation of results, and broader human-led security review.
+This project shows that **no single automated DAST tool can see the whole picture**.
+
+- **Burp Suite Professional** emerged as the strongest individual scanner, delivering the deepest application-layer coverage, the most confirmed **High** severity findings, and the broadest detection across **OWASP Top 10:2025** categories.  
+- **OWASP ZAP** was a valuable but less consistent performer: it produced strong raw detection volume, but fewer high-risk, fully confirmed vulnerabilities, and its results were partly constrained by runtime and stability limitations in the lab environment.  
+- **Nikto**, while narrower in scope, added meaningful **server-level** visibility, surfacing misconfigurations and exposed components that neither application-layer scanner replicated.
+
+A key outcome of the overlap analysis is that the three tools are **highly complementary**. The vast majority of findings were **unique to a single scanner**, which means that relying on any one tool would leave a substantial number of vulnerabilities undetected. In practice, a **multi-tool DAST strategy** (Burp + ZAP + Nikto) identifies significantly more issues than any single scanner on its own.
+
+The study also highlights two important nuances:
+
+- **Severity ratings are tool-relative, not universal.** Burp Suite Professional and OWASP ZAP use different internal logic to assign High / Medium / Low / Informational, so severity labels cannot be treated as directly comparable across tools.  
+- **Configuration and runtime matter as much as engine capability.** Crawl depth, authentication setup, scan duration and stability constraints materially changed what each scanner was able to find.
+
+Overall, the conclusion is that automated web vulnerability scanning provides **valuable but incomplete security assurance**. Effective assessment requires **multiple tools**, careful human interpretation of scanner outputs, and integration with broader security practices such as manual testing, code review and secure design — not blind trust in a single “best” scanner.
