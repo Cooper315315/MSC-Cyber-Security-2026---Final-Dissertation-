@@ -35,7 +35,7 @@ A controlled experimental design was used within an isolated virtual laboratory 
 
 **Supporting technologies:**
 - Python (Pandas, Matplotlib) for data parsing and analysis
-- Virtual machine environment (isolated lab) for controlled testing
+- Virtual machine environment (VMware workstation pro - Kali Linux) for controlled testing
 
 ## 📊 Key Metrics for Evaluation
 
