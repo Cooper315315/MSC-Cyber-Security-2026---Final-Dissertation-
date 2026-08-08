@@ -18,7 +18,9 @@ Under the same deliberately vulnerable web application and identical scanning co
 
 ## 🧪 Research Method
 
-The study uses a **controlled experimental design** within an isolated virtual lab environment. Each DAST tool is configured identically in terms of scan scope, authentication and scanning policy, then run against each target application for a minimum of three scan iterations following a repeated-measures protocol. Scan outputs are exported in structured formats (XML/HTML), parsed using Python, and compiled into a Vulnerability Analysis Dataset for descriptive and comparative statistical analysis.
+This study adopts a **quantitative research method** because it evaluates scanner performance using measurable numerical outcomes, including vulnerability counts, severity distributions, OWASP Top 10:2025 coverage, inter-tool overlap and scan duration. This approach enables an objective comparison of how each scanner performs against the same targets.
+
+A controlled experimental design was used within an isolated virtual laboratory environment. Burp Suite Professional, OWASP ZAP and Nikto were configured with the same target scope, authentication requirements and available scanning policies. Each tool scanned both deliberately vulnerable applications—DVWA and bWAPP—over a minimum of three iterations using a repeated-measures protocol. Scan results were exported in structured XML or HTML formats, parsed with Python, and compiled into a Vulnerability Analysis Dataset. Descriptive and comparative statistical analysis was then used to identify performance differences, detection patterns and areas of overlap between the tools.
 
 ## 🛠️ Tools Used
 
