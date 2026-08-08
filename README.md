@@ -64,6 +64,14 @@ OWASP ZAP produced the highest raw count on bWAPP, while Burp Suite Professional
 
 Burp Suite Professional consistently identified the most High severity, confirmed-exploitable vulnerabilities (e.g. SQL injection, PHP code injection) on both targets. OWASP ZAP detected zero High severity findings on bWAPP and only one on DVWA, with its detections spread more evenly across Medium, Low and Informational categories. Nikto's report format does not assign severity ratings by design, so OWASP/CWE mapping was used to infer relative risk.
 
+<img width="800" height="500" alt="Screenshot 2026-08-08 at 20 15 10" src="https://github.com/user-attachments/assets/9d4d77ad-e470-46dc-a858-9817cff4cedf" />
+<img width="800" height="500" alt="Screenshot 2026-08-08 at 20 15 26" src="https://github.com/user-attachments/assets/a1eadc9f-9a81-434f-bfd4-9fd297409a0e" />
+
+
+
+
+
+
 **OWASP Top 10:2025 Coverage**
 
 | Target | Burp Suite Professional | OWASP ZAP | Nikto |
